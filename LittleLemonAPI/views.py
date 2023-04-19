@@ -11,7 +11,13 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from django.core.paginator import Paginator, EmptyPage
-# Create your views here.
+
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import permission_classes
+
+
+
+
 
 # class MenuItemsView(generics.ListCreateAPIView):
 #     queryset=MenuItem.objects.all()
@@ -69,3 +75,8 @@ def category_detail(request, pk):
     category = get_object_or_404(Category,pk=pk)
     serialized_category = CategorySerializer(category)
     return Response(serialized_category.data) 
+
+@api_view()
+@permission_classes([IsAuthenticated])
+def secret(request):
+    return Response({"message":"Some secret message"})
