@@ -12,4 +12,6 @@ urlpatterns=[
     path('secret/',views.secret),
     path('api-token-auth/',obtain_auth_token), #This endpoint get the token of the user
     path('manager_view/',views.manager_view),
+    path('throttle-check/',views.throttle_check),#This endpoint limit the call of the endpoint to 2 calls for minute
+    path('throttle-check-auth/',views.throttle_check_auth),
 ]
