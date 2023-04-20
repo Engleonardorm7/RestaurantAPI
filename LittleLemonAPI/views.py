@@ -76,7 +76,16 @@ def category_detail(request, pk):
     serialized_category = CategorySerializer(category)
     return Response(serialized_category.data) 
 
-@api_view()
+@api_view() #para verificar que el usuario tiene la key
 @permission_classes([IsAuthenticated])
 def secret(request):
     return Response({"message":"Some secret message"})
+
+
+@api_view() #para verificar los permisos del usuario
+@permission_classes([IsAuthenticated])
+def manager_view(request):
+    if request.user.groups.filter(name='Manager').exists():
+        return Response({"message":"only manager should see this"})
+    else:
+        return Response({"message": "You are not authorized"},403)
