@@ -31,9 +31,12 @@ from .models import MenuItem
 from .serializers import MenuItemSerializer  
 
 from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
+from .throttles import TenCallsPerMinute
+
 
 class MenuItemsViewSet(viewsets.ModelViewSet):
     #throttle_classes=[AnonRateThrottle,UserRateThrottle]
+    throttle_classes=[TenCallsPerMinute]
     queryset = MenuItem.objects.all()
     serializer_class = MenuItemSerializer
     ordering_fields=['price','inventory']
