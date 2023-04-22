@@ -14,5 +14,6 @@ urlpatterns=[
     path('manager_view/',views.manager_view),
     path('throttle-check/',views.throttle_check),#This endpoint limit the call of the endpoint to 2 calls for minute
     path('throttle-check-auth/',views.throttle_check_auth),
+    path('groups/manager/users',views.managers)
     
 ]
